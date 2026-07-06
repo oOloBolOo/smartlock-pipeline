@@ -1,0 +1,20 @@
+stages:
+  - configure
+  - e2e_test
+
+# Etap 1: Konfiguracja urządzenia przez Ansible
+konfiguruj_rpi:
+  stage: configure
+  image: ubuntu:latest
+  script:
+    - apt-get update && apt-get install ansible -y
+    - ansible-playbook setup_rpi.yml
+    
+# Etap 2: Właściwe testy sprzętowe na fizycznej maszynie
+uruchom_testy_hil:
+  stage: e2e_test
+  tags:
+    - hil-station  # Wymuszamy uruchomienie zadania na malince, nie w chmurze
+  script:
+    - ./reset_lock.sh
+    - pytest test_lock.py

@@ -1,0 +1,12 @@
+- name: Przygotowanie stacji HIL (Raspberry Pi 5)
+  hosts: all
+  become: yes
+  tasks:
+    - name: Upewnij się, że Python3 jest obecny
+      apt: name=python3 state=latest
+      
+    - name: Nadaj uprawnienia do portu szeregowego dla Runnera (Kluczowe!)
+      user:
+        name: gitlab-runner
+        groups: dialout
+        append: yes
