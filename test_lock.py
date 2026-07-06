@@ -2,8 +2,9 @@ import serial
 import json
 import pytest
 
+print("Uruchamiam zautomatyzowany test HIL...")
 # Konfiguracja połączenia
-ser = serial.Serial('/dev/ttyUSB0', baudrate=115200, timeout=2)
+ser = serial.Serial('/dev/ttyUSB0', baudrate=115200, timeout=2) 
 
 def test_unlock_mechanism():
     # Przygotowujemy payload (paczka danych)
